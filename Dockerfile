@@ -37,15 +37,5 @@ RUN \
     apt-get purge -y wget unzip && \
     apt-get autoremove -y && \
     apt-get clean
-    
-EXPOSE 54321
-EXPOSE 54322
-
-# install h2o related packages
-RUN install2.r --error \
-    rjson \
-    statmod \
-    survival
-&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 RUN R -e 'install.packages("h2o", type="source", repos=(c("http://h2o-release.s3.amazonaws.com/h2o/rel-turing/7/R")))'
