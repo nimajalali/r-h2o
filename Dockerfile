@@ -1,4 +1,4 @@
-FROM rocker/r-apt:trusty
+FROM rocker/r-base
 
 # Install Java
 # https://github.com/William-Yeh/docker-java7/blob/master/Dockerfile
@@ -18,7 +18,6 @@ RUN \
   \
   echo "===> clean up..."  && \
   rm -rf /var/cache/oracle-jdk7-installer  && \
-  apt-get clean  && \
   rm -rf /var/lib/apt/lists/*
 
 # Define commonly used JAVA_HOME variable
@@ -33,8 +32,6 @@ RUN \
     unzip h2o-${H2O_VERSION}.zip && \
     rm h2o-${H2O_VERSION}.zip && \
     ln -s h2o-${H2O_VERSION} h2o && \
-    apt-get purge -y wget unzip && \
-    apt-get autoremove -y && \
-    apt-get clean
+    apt-get purge -y wget unzip
 
 RUN R -e 'install.packages("h2o", type="source", repos=(c("http://h2o-release.s3.amazonaws.com/h2o/rel-turing/7/R")))'
