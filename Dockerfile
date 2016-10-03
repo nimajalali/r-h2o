@@ -1,5 +1,4 @@
-FROM rocker/hadleyverse
-MAINTAINER "Jonathan Owen" jonathanro@gmail.com
+FROM rocker/r-base
 
 # Install Java
 # https://github.com/William-Yeh/docker-java7/blob/master/Dockerfile
