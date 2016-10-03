@@ -3,7 +3,6 @@ FROM r-base
 RUN \
   echo 'DPkg::Post-Invoke {"/bin/rm -f /var/cache/apt/archives/*.deb || true";};' | tee /etc/apt/apt.conf.d/no-cache && \
   echo "deb http://ap-northeast-1.ec2.archive.ubuntu.com/ubuntu trusty main universe" >> /etc/apt/sources.list && \
-  apt-key update -y && \
   apt-get update -q -y && \
   apt-get dist-upgrade -y && \
   apt-get clean && \
@@ -11,6 +10,10 @@ RUN \
 
 # Install Oracle Java 7
 RUN \
+  apt-get update -q -y && \
+  apt-get install -y gnupg2 && \
+  apt-key update -y && \
+  apt-get update -q -y && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y wget unzip software-properties-common python-software-properties && \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get update -q && \
