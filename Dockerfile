@@ -1,19 +1,4 @@
-FROM harisekhon/debian-java:jre7
-
-ARG H2O_VERSION=3.10.0.3
-
-ENV PATH $PATH:/h2o/bin
-
-RUN \
-    apt-get update && \
-    apt-get install -y --no-install-recommends wget unzip && \
-    wget -t 100 --retry-connrefused http://download.h2o.ai/versions/h2o-${H2O_VERSION}.zip && \
-    unzip h2o-${H2O_VERSION}.zip && \
-    rm h2o-${H2O_VERSION}.zip && \
-    ln -s h2o-${H2O_VERSION} h2o && \
-    apt-get purge -y wget unzip && \
-    apt-get autoremove -y && \
-    apt-get clean
+FROM harisekhon/h2o
 
 ENV R_BASE_VERSION 3.3.1
 
