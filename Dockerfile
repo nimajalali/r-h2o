@@ -7,5 +7,5 @@ ENV R_BASE_VERSION 3.3.1
 RUN sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list' && \
 	gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 && \
 	gpg -a --export E084DAB9 | sudo apt-key add - && \
-	apt-get update && \
+	apt-get update -y && \
 	apt-get install -y r-base=${R_BASE_VERSION}*
