@@ -32,6 +32,5 @@ RUN \
     unzip h2o-${H2O_VERSION}.zip && \
     rm h2o-${H2O_VERSION}.zip && \
     ln -s h2o-${H2O_VERSION} h2o && \
-    apt-get purge -y wget unzip
 
 RUN R -e 'install.packages("h2o", type="source", repos=(c("http://h2o-release.s3.amazonaws.com/h2o/rel-turing/7/R")))'
