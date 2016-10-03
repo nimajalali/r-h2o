@@ -31,6 +31,6 @@ RUN \
     wget -t 100 --retry-connrefused http://download.h2o.ai/versions/h2o-${H2O_VERSION}.zip && \
     unzip h2o-${H2O_VERSION}.zip && \
     rm h2o-${H2O_VERSION}.zip && \
-    ln -s h2o-${H2O_VERSION} h2o && \
+    ln -s h2o-${H2O_VERSION} h2o
 
 RUN R -e 'install.packages("h2o", type="source", repos=(c("http://h2o-release.s3.amazonaws.com/h2o/rel-turing/7/R")))'
