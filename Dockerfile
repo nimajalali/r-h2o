@@ -23,7 +23,7 @@ RUN \
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 
-ARG H2O_VERSION=3.10.0.7
+ARG H2O_VERSION=3.10.0.6
 
 RUN \
     apt-get update && \
@@ -35,4 +35,4 @@ RUN \
 
 RUN apt-get install -y libcurl4-gnutls-dev
 RUN R -e 'pkgs <- c("methods","statmod","stats","graphics","RCurl","jsonlite","tools","utils");for (pkg in pkgs) {if (! (pkg %in% rownames(installed.packages()))) { install.packages(pkg) }}'
-RUN R -e 'install.packages("h2o", type="source", repos=(c("http://h2o-release.s3.amazonaws.com/h2o/rel-turing/7/R")))'
+RUN R -e 'install.packages("h2o", type="source", repos=(c("http://h2o-release.s3.amazonaws.com/h2o/rel-turing/6/R")))'
