@@ -1,4 +1,4 @@
-FROM rocker/r-base
+FROM rocker/r-apt:trusty
 
 # Install Java
 # https://github.com/William-Yeh/docker-java7/blob/master/Dockerfile
