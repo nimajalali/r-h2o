@@ -68,7 +68,3 @@ COPY ffmpeg /usr/bin/
 COPY ffprobe /usr/bin/
 RUN chmod 777 /usr/bin/ffprobe
 RUN chmod 777 /usr/bin/ffmpeg
-
-# Define working directory.
-WORKDIR /home/docker
-
