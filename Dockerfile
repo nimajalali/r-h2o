@@ -26,7 +26,7 @@ RUN \
   apt-get install -y python python-dev python-pip python-virtualenv && \
   rm -rf /var/lib/apt/lists/*
 
-RUN pip install numpy==1.12.0 && \
+RUN pip install numpy==1.12.1 && \
     pip install scipy==0.19.0  && \
     pip install appdirs==1.4.3 && \
     pip install audioread==2.1.4 && \
@@ -36,7 +36,7 @@ RUN pip install numpy==1.12.0 && \
     pip install ez-setup==0.9 && \
     pip install functools32==3.2.3.post2 && \
     pip install joblib==0.11 && \
-    pip install librosa==0.5.0 && \
+    pip install librosa==0.5.1 && \
     pip install matplotlib==2.0.0 && \
     pip install packaging==16.8 && \
     pip install pyparsing==2.2.0 && \
