@@ -7,6 +7,8 @@ FROM rocker/r-base
 # https://github.com/dockerfile/java/tree/master/oracle-java8
 #
 
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-common
+
 # Install Java.
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
