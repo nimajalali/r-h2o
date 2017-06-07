@@ -1,24 +1,4 @@
-FROM rocker/r-base
-
-# Install Java
-# https://github.com/William-Yeh/docker-java7/blob/master/Dockerfile
-RUN \
-  echo "===> add webupd8 repository..."  && \
-  echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list  && \
-  echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list  && \
-  apt-get update && \
-  apt-get install -y gnupg && \
-  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886  && \
-  apt-get update  && \
-  \
-  echo "===> install Java"  && \
-  echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections  && \
-  echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections  && \
-  DEBIAN_FRONTEND=noninteractive  apt-get install -y --force-yes oracle-java7-installer oracle-java7-set-default  && \
-  \
-  echo "===> clean up..."  && \
-  rm -rf /var/cache/oracle-jdk7-installer  && \
-  rm -rf /var/lib/apt/lists/*
+FROM cardcorp/r-java
 
 # Install Python.
 RUN \
@@ -26,7 +6,7 @@ RUN \
   apt-get install -y python python-dev python-pip python-virtualenv && \
   rm -rf /var/lib/apt/lists/*
 
-RUN pip install numpy==1.12.0 && \
+RUN pip install numpy==1.12.1 && \
     pip install scipy==0.19.0  && \
     pip install appdirs==1.4.3 && \
     pip install audioread==2.1.4 && \
@@ -36,7 +16,7 @@ RUN pip install numpy==1.12.0 && \
     pip install ez-setup==0.9 && \
     pip install functools32==3.2.3.post2 && \
     pip install joblib==0.11 && \
-    pip install librosa==0.5.0 && \
+    pip install librosa==0.5.1 && \
     pip install matplotlib==2.0.0 && \
     pip install packaging==16.8 && \
     pip install pyparsing==2.2.0 && \
@@ -46,9 +26,6 @@ RUN pip install numpy==1.12.0 && \
     pip install scikit-learn==0.18.1 && \
     pip install six==1.10.0 && \
     pip install subprocess32==3.2.7
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 
 ARG H2O_VERSION=3.10.4.1
 
