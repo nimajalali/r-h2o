@@ -1,24 +1,27 @@
 FROM rocker/r-base
 
-# Install Java
-# https://github.com/William-Yeh/docker-java7/blob/master/Dockerfile
+#
+# Oracle Java 8 Dockerfile
+#
+# https://github.com/dockerfile/java
+# https://github.com/dockerfile/java/tree/master/oracle-java8
+#
+
+# Install Java.
 RUN \
-  echo "===> add webupd8 repository..."  && \
-  echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list  && \
-  echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list  && \
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
   apt-get update && \
-  apt-get install -y gnupg && \
-  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886  && \
-  apt-get update  && \
-  \
-  echo "===> install Java"  && \
-  echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections  && \
-  echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections  && \
-  DEBIAN_FRONTEND=noninteractive  apt-get install -y --force-yes oracle-java7-installer oracle-java7-set-default  && \
-  \
-  echo "===> clean up..."  && \
-  rm -rf /var/cache/oracle-jdk7-installer  && \
-  rm -rf /var/lib/apt/lists/*
+  apt-get install -y oracle-java8-installer && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer
+
+
+# Define working directory.
+WORKDIR /data
+
+# Define commonly used JAVA_HOME variable
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 # Install Python.
 RUN \
@@ -46,9 +49,6 @@ RUN pip install numpy==1.12.1 && \
     pip install scikit-learn==0.18.1 && \
     pip install six==1.10.0 && \
     pip install subprocess32==3.2.7
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 
 ARG H2O_VERSION=3.10.4.1
 
