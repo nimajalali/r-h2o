@@ -1,4 +1,4 @@
-FROM r/cardcorp/r-java
+FROM cardcorp/r-java
 
 # Install Python.
 RUN \
